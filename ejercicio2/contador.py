@@ -19,6 +19,4 @@ def ejr2():
             f.write(str(int(valor) - 1))
         else:
             print(valor)
-        f.close
-
-ejr2()
+        f.close()
