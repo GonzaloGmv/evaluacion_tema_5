@@ -11,3 +11,6 @@ def main():
         ejr2()
     elif ejr == '3':
         ejr3()
+    elif ejr == '4':
+        print('Escriba el siguiente comando en el terminal: ')
+        print('python ejercicio4/reloj.py')
