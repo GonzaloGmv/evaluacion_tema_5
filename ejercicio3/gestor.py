@@ -9,25 +9,24 @@ class Personaje:
         self.alcance = alcance
 
 class Gestor:
-    def añadir_personaje(nombre, vida, ataque, defensa, alcance):
-        personaje = Personaje(nombre, vida, ataque, defensa, alcance)
-        f = open("personajes.pckl", "ab")
+    def añadir_personaje(personaje):
+        f = open("ejercicio3/personajes.pckl", "ab")
         f.close()
-        f = open("personajes.pckl", "rb")
+        f = open("ejercicio3/personajes.pckl", "rb")
         while True:
             try:
                 a = pickle.load(f)
-                if a.nombre == nombre:
+                if a.nombre == personaje.nombre:
                     return
             except EOFError:
                 break
         f.close()
-        f = open("personajes.pckl", "ab")
+        f = open("ejercicio3/personajes.pckl", "ab")
         pickle.dump(personaje, f)
         f.close()
 
-    def mostrar_personajes(nombre):
-        f = open("personajes.pckl", "rb")
+    def mostrar_personajes():
+        f = open("ejercicio3/personajes.pckl", "rb")
         while True:
             try:
                 personaje = pickle.load(f)
@@ -37,7 +36,7 @@ class Gestor:
         f.close()
     
     def borrar_personajes(nombre):
-        f = open("personajes.pckl", "rb")
+        f = open("ejercicio3/personajes.pckl", "rb")
         personajes = []
         while True:
             try:
@@ -47,7 +46,20 @@ class Gestor:
             except EOFError:
                 break
         f.close()
-        f = open("personajes.pckl", "wb")
+        f = open("ejercicio3/personajes.pckl", "wb")
         for personaje in personajes:
             pickle.dump(personaje, f)
         f.close()
+
+caballero = Personaje("Caballero", 4, 2, 4, 2)
+guerrero = Personaje("Guerrero", 2, 4, 2, 4)
+arquero = Personaje("Arquero", 2, 4, 1, 8)
+Gestor.añadir_personaje(caballero)
+Gestor.añadir_personaje(guerrero)
+Gestor.añadir_personaje(arquero)
+Gestor.mostrar_personajes()
+print('\n')
+print('Borramos al arquero:')
+print('\n')
+Gestor.borrar_personajes("Arquero")
+Gestor.mostrar_personajes()
